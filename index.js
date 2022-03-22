@@ -20,12 +20,31 @@ const employeeList = [];
 // console.log(webpage.generateWebpage());
 // webpage.generateWebpage();
 
-var addMore = true;
+var name;
+var id;
+var email;
+var role;
+var uniqueContent;
+
 
 const employeeTypes = ['Engineer', 'Intern', 'Manager', 'Done Adding'];
 const employeeQuestions = ['What is their GitHub username?', 'What School do they go to?', 'What is their office number?'];
 
-const employeeType = () => {
+function generateEmployee(a, b, type) {
+    if (type === 'Engineer') {
+        
+    }
+    else if (type === 'Intern') {
+
+    }
+    else if (type === 'Manager') {
+        
+    }
+
+}
+
+const employeeType = (a) => {
+    var prevAns = a;
     return inquirer.prompt([
         {
             type: 'list',
@@ -36,10 +55,14 @@ const employeeType = () => {
         
     ]).then((employee) => {
         if (employee.employeeType === 'Engineer') {
-            uniquePrompt(employeeQuestions[0]);
+            uniquePrompt(employeeQuestions[0], a, 'Engineer');
         }
-    
-    
+        else if (employee.employeeType === 'Intern') {
+            uniquePrompt(employeeQuestions[1], a, 'Intern');
+        }
+        else if (employee.employeeType === 'Manager') {
+            uniquePrompt(employeeQuestions[2], a, 'Intern');
+        }
         // const webpage = new Webpage(employeeList);
     })
 }
@@ -62,12 +85,11 @@ const plainPrompt = () => {
         },
     
     ]).then((answers) => {
-        employeeType();
-
+        employeeType(answers);
         // const webpage = new Webpage(employeeList);
     })
 }
-const uniquePrompt = (msg) => {
+const uniquePrompt = (msg, prevAns, type) => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -81,8 +103,12 @@ const uniquePrompt = (msg) => {
             choices: ['Yes', 'No']
         }
     ]).then((cont) => {
-        if (cont.continue === 'No') { addMore = false; }
-        else {  plainPrompt(); }
+        generateEmployee(prevAns, cont, type);
+        if (cont.continue === 'No') {  }
+        else {
+            
+        plainPrompt(); 
+        }
     })
 }
 plainPrompt();
