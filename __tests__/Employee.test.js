@@ -1,5 +1,5 @@
 const { expect } = require('@jest/globals');
-const Employee = require('../lib/Employee');
+const Employee = require('../lib/Employee.js');
 
 describe("Employee", () => {
     describe("init", () => {
@@ -19,7 +19,7 @@ describe("Employee", () => {
     describe("getId", () => {
         it('should return the id', () => {
         const employee = new Employee('James', 2, 'james@gmail.com');
-        expect(employee.getId()).toBe(1);
+        expect(employee.getId()).toBe(2);
         });
       });
       describe("getEmail", () => {
