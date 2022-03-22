@@ -27,47 +27,49 @@ var role;
 var uniqueContent;
 
 
-const employeeTypes = ['Engineer', 'Intern', 'Manager', 'Done Adding'];
+const employeeTypes = ['Engineer', 'Intern', 'Manager'];
 const employeeQuestions = ['What is their GitHub username?', 'What School do they go to?', 'What is their office number?'];
 
-function generateEmployee(a, b, type) {
-    if (type === 'Engineer') {
-        
+function generateEmployee(plain, unique, type) {
+    name = plain.name;
+    email = plain.email;
+    id = plain.id;
+    uniqueContent = unique.uniqueAttr;
+    role = type;
+    if (role === 'Engineer') {
+        employeeList.push(new Engineer(name, id, email, uniqueContent));
     }
-    else if (type === 'Intern') {
-
+    else if (role === 'Intern') {
+        employeeList.push(new Intern(name, id, email, uniqueContent));
     }
-    else if (type === 'Manager') {
-        
+    else if (role === 'Manager') {
+        employeeList.push(new Manager(name, id, email, uniqueContent));
     }
 
 }
 
-const employeeType = (a) => {
+const employeeType = async (a) => {
     var prevAns = a;
-    return inquirer.prompt([
+    const employee = await inquirer.prompt([
         {
             type: 'list',
             message: `What is the role of the employee?`,
             name: 'employeeType',
             choices: employeeTypes,
-        }, 
-        
-    ]).then((employee) => {
-        if (employee.employeeType === 'Engineer') {
-            uniquePrompt(employeeQuestions[0], a, 'Engineer');
-        }
-        else if (employee.employeeType === 'Intern') {
-            uniquePrompt(employeeQuestions[1], a, 'Intern');
-        }
-        else if (employee.employeeType === 'Manager') {
-            uniquePrompt(employeeQuestions[2], a, 'Intern');
-        }
-        // const webpage = new Webpage(employeeList);
-    })
+        },
+    ]);
+    if (employee.employeeType === 'Engineer') {
+        uniquePrompt(employeeQuestions[0], prevAns, 'Engineer');
+    }
+    else if (employee.employeeType === 'Intern') {
+        uniquePrompt(employeeQuestions[1], prevAns, 'Intern');
+    }
+    else if (employee.employeeType === 'Manager') {
+        uniquePrompt(employeeQuestions[2], prevAns, 'Manager');
+    }
 }
-const plainPrompt = () => {
-    return inquirer.prompt([
+const plainPrompt = async () => {
+    const answers = await inquirer.prompt([
         {
             type: 'input',
             message: 'What is the name of the employee?',
@@ -83,14 +85,11 @@ const plainPrompt = () => {
             message: 'What is the id of the employee?',
             name: 'id'
         },
-    
-    ]).then((answers) => {
-        employeeType(answers);
-        // const webpage = new Webpage(employeeList);
-    })
+    ]);
+    employeeType(answers);
 }
-const uniquePrompt = (msg, prevAns, type) => {
-    return inquirer.prompt([
+const uniquePrompt = async (msg, prevAns, type) => {
+    const cont = await inquirer.prompt([
         {
             type: 'input',
             message: msg,
@@ -102,13 +101,15 @@ const uniquePrompt = (msg, prevAns, type) => {
             name: 'continue',
             choices: ['Yes', 'No']
         }
-    ]).then((cont) => {
-        generateEmployee(prevAns, cont, type);
-        if (cont.continue === 'No') {  }
-        else {
-            
-        plainPrompt(); 
-        }
-    })
+    ]);
+    generateEmployee(prevAns, cont, type);
+    if (cont.continue === 'Yes') { 
+        plainPrompt();
+    }
+    else {
+        const webpage = new Webpage(employeeList);
+        console.log(webpage.generateWebpage());
+        webpage.generateWebpage();
+    }
 }
 plainPrompt();
