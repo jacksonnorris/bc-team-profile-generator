@@ -1,0 +1,30 @@
+header {
+  text-align: center;
+  margin-top: 20px;
+  border-bottom: 4px solid black;
+}
+.container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-evenly;
+}
+.employee {
+  min-width: 400px;
+  border: solid black 2px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 10px;
+  margin: 10px;
+  box-shadow: 4px 4px 10px;
+}
+.name {
+  color: white;
+  background-color: blue;
+  border-bottom: 2px solid black;
+  padding: 20px;
+  border: 0px solid black;
+}
+.cardContent {
+  padding: 20px;
+}
