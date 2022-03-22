@@ -3,7 +3,7 @@ const Employee = require('../lib/Employee.js');
 
 describe("Employee", () => {
     describe("init", () => {
-      it('it should return the ', () => {
+      it('It should require an Employee to have a name, id, and email', () => {
         const employee = new Employee('James', 2, 'james@gmail.com');
         expect("name" in employee).toBe(true)
         expect("id" in employee).toBe(true)
