@@ -18,6 +18,8 @@ To install, use npm install
 
 Watch this youTube video to see how to work the application
 
+Note: the sample HTML file is output into lib/index.html
+
 [![Walkthrough](https://i9.ytimg.com/vi/-2uDgT-Aqes/mq3.jpg?sqp=CNTD6ZEG&rs=AOn4CLBj-KBt7mvW4KefptMg0KGnX77rRQ&retry=4)](https://youtu.be/-2uDgT-Aqes)
 
 ## License
