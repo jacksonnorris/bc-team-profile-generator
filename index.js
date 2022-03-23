@@ -96,5 +96,6 @@ const uniquePrompt = async (msg, prevAns, type) => {
         const webpage = new Webpage(employeeList);
         webpage.generateWebpage();
     }
+
 }
 plainPrompt();
